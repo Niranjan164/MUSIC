@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MUSIC</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      color: red;
+      font-family: Arial, sans-serif;
+    }
+
+    .cubes {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .cube {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid transparent;
+      animation: float 15s linear infinite;
+      border-radius: 5px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: red;
+      margin-top: 30px;
+      font-size: 36px;
+    }
+
+    .song-list {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      top: 15vh;
+    }
+
+    .song {
+      margin: 20px auto;
+      padding: 10px 20px;
+      border: 2px solid cyan;
+      width: 300px;
+      border-radius: 10px;
+      background-color: rgba(0, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .song:hover {
+      background-color: rgba(0, 255, 255, 0.2);
+    }
+
+    .song span {
+      color: red;
+      font-size: 20px;
+    }
+
+    audio {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cubes">
+  <script>
+    for (let i = 0; i < 30; i++) {
+      const cube = document.createElement('div');
+      cube.className = 'cube';
+      cube.style.left = `${Math.random() * 100}vw`;
+      cube.style.top = `${Math.random() * 100}vh`;
+      cube.style.backgroundColor = `hsla(${Math.random() * 360}, 100%, 50%, 0.3)`;
+      cube.style.width = `${10 + Math.random() * 20}px`;
+      cube.style.height = cube.style.width;
+      cube.style.animationDuration = `${10 + Math.random() * 10}s`;
+      document.querySelector('.cubes').appendChild(cube);
+    }
+  </script>
+</div>
+
+<h1>MUSIC</h1>
+
+<div class="song-list" id="songList"></div>
+
+<audio id="player" controls>
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  // ✅ Add your GitHub raw MP3 links here
+  const songs = [
+    { name: "ANIMAL BGM", url: "https://github.com/Niranjan164/MUSIC/raw/main/animal_bgm_103522.mp3" },
+    { name: "BEAST BGM", url: "https://github.com/Niranjan164/m/raw/main/AUD-20250422-WA0000_010915..mp3" } // Replace this with actual song
+    // Add more songs here
+  ];
+
+  const songList = document.getElementById('songList');
+  const player = document.getElementById('player');
+
+  songs.forEach(song => {
+    const div = document.createElement('div');
+    div.className = 'song';
+    div.innerHTML = `<span>${song.name}</span>`;
+    div.onclick = () => {
+      player.src = song.url;
+      player.play();
+    };
+    songList.appendChild(div);
+  });
+</script>
+
+</body>
+</html>
